@@ -13,7 +13,7 @@
 <footer class="bg-brand text-white">
   <div class="border-b border-white/70">
     <div class="shell signup">
-      <h2 class="text-white font-medium text-2xl md:text-section">現在訂閱，獲得課程優惠碼！</h2>
+      <h2 class="text-white text-2xl md:text-section md:font-medium">現在訂閱，獲得課程優惠碼！</h2>
       <form class="signup-form" onsubmit={subscribe}>
         <label class="sr-only" for="newsletter-email">輸入您的電子信箱</label>
         <div class="flex">
@@ -44,7 +44,7 @@
       <img src="/images/shared/logo-white.webp" width="96" height="31" alt="DOYOGA" />
     </a>
     <SocialLinks class="footer-social text-xl" />
-    <nav aria-label="頁尾選單" class="footer-nav">
+    <nav aria-label="頁尾選單" class="footer-nav font-light">
       {#each navigation as item (item.href)}<a href={item.href} class="hover:underline">
           {item.label}
         </a>{/each}

@@ -30,7 +30,7 @@
     >
       <img src="/images/shared/logo.webp" width="96" height="31" alt="DOYOGA" />
     </a>
-    <nav class="desktop-nav font-[350]" aria-label="主選單">
+    <nav class="desktop-nav font-light" aria-label="主選單">
       {#each navigation as item (item.href)}
         <a href={item.href} aria-current={page.url.pathname === item.href ? 'page' : undefined}>
           {item.label}

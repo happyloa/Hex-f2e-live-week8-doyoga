@@ -51,7 +51,7 @@ else {
 
 const subset = await subsetFont(font, printable, {
   targetFormat: "truetype",
-  variationAxes: { wght: { min: 350, default: 400, max: 700 } },
+  variationAxes: { wght: { min: 300, default: 400, max: 700 } },
 });
 const renameScript = fileURLToPath(
   new URL("./rename-font.py", import.meta.url),
@@ -77,7 +77,7 @@ await writeFile(
     "  font-family: 'DOYOGA Han Sans';",
     "  src: url('./ui.woff2') format('woff2');",
     "  font-style: normal;",
-    "  font-weight: 350 700;",
+    "  font-weight: 300 700;",
     "  font-display: swap;",
     `  unicode-range: ${ranges.join(", ")};`,
     "}",

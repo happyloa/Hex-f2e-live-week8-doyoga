@@ -119,7 +119,7 @@
   </form>
 </div>
 
-<section class="shell catalog pt-[46px] pb-[18px] md:pt-[54px]" aria-label="課程列表">
+<section class="shell catalog pt-[46px] pb-12 md:pt-[54px]" aria-label="課程列表">
   <div>
     <p class="sr-only" aria-live="polite">找到 {filtered.length} 堂課程</p>
     {#if filtered.length}
@@ -145,7 +145,7 @@
   </div>
   <aside class="course-notes text-brand" {@attach reveal}>
     <h2 class="mb-2 text-lead">DOYOGA 上課須知：</h2>
-    <ul class="space-y-2">
+    <ul class="space-y-1">
       {#each courseNotes as note (note)}<li>{note}</li>{/each}
     </ul>
   </aside>
@@ -200,11 +200,14 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .course-notes {
-      max-width: 400px;
+      max-width: 330px;
       margin-inline: auto;
     }
   }
   @media (min-width: 1024px) {
+    .course-notes {
+      padding-top: 2px;
+    }
     .search-form {
       grid-template-columns: 350px 106px;
     }
@@ -244,7 +247,7 @@
     }
     .catalog {
       row-gap: 40px;
-      padding-bottom: 128px;
+      padding-bottom: 72px;
     }
   }
 </style>

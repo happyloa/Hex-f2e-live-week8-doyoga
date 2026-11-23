@@ -1,7 +1,6 @@
 <script lang="ts">
   import { teachers } from '#lib/content.ts';
   import { reveal } from '#lib/motion.ts';
-  import SectionHeading from '#lib/ui/SectionHeading.svelte';
   import CarouselButtons from '#lib/ui/CarouselButtons.svelte';
   let track: HTMLElement | undefined = $state();
 </script>
@@ -12,16 +11,16 @@
   {@attach reveal}
 >
   <div class="shell">
-    <SectionHeading id="course-teachers" title="師資介紹" />
+    <h2 id="course-teachers" class="text-center text-section">師資介紹</h2>
     <ul class="teacher-track" bind:this={track}>
       {#each teachers as teacher, index (teacher.name)}
         <li class="teacher-card {index % 2 ? 'bg-brand' : 'bg-rose'}">
           <img src="/images/shared/{teacher.image}" width="96" height="96" alt="" loading="lazy" />
           <h3 class="text-lead text-white">{teacher.name} 老師</h3>
           <p class="mt-1">教學經歷 {teacher.years} 年</p>
-          <blockquote class="my-4 text-left">「{teacher.quote}」</blockquote>
-          <ul class="list-disc space-y-1 pl-5 text-left">
-            {#each teacher.credentials as credential (credential)}<li>{credential}</li>{/each}
+          <blockquote class="my-4 text-left font-light whitespace-pre-line">“{teacher.quote}”</blockquote>
+          <ul class="space-y-1 text-left" role="list">
+            {#each teacher.credentials as credential (credential)}<li><span aria-hidden="true">・</span>{credential}</li>{/each}
           </ul>
         </li>
       {/each}
@@ -32,7 +31,7 @@
 
 <style>
   .teacher-section {
-    padding-block: 36px 98px;
+    padding-block: 32px 88px;
     overflow: hidden;
   }
   .teacher-track {
@@ -56,9 +55,6 @@
     border-radius: 50%;
   }
   @media (min-width: 768px) {
-    .teacher-section {
-      padding-top: 32px;
-    }
     .teacher-track {
       display: flex;
       gap: 30px;
