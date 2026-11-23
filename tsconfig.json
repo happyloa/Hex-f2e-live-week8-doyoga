@@ -1,0 +1,11 @@
+{
+  "extends": "$app/tsconfig",
+  "include": ["src", "vite.config.ts"],
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  }
+}

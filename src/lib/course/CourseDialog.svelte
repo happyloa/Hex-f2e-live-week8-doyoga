@@ -1,0 +1,119 @@
+<script lang="ts">
+  import X from '@lucide/svelte/icons/x';
+  import { aerialDescription } from '#lib/content.ts';
+  import type { Course } from '#lib/content.ts';
+  import Button from '#lib/ui/Button.svelte';
+
+  let { course, onclose }: { course: Course | undefined; onclose: () => void } = $props();
+  let dialog: HTMLDialogElement;
+
+  $effect(() => {
+    if (course && !dialog.open) dialog.showModal();
+    if (!course && dialog.open) dialog.close();
+  });
+</script>
+
+<dialog bind:this={dialog} aria-labelledby="course-dialog-title" {onclose}>
+  {#if course}
+    <div class="dialog-body">
+      <form method="dialog" class="absolute right-3 top-3">
+        <button
+          type="submit"
+          class="icon-button text-white! hover:bg-brand!"
+          aria-label="關閉課程詳情"
+        >
+          <X size={24} />
+        </button>
+      </form>
+      <div class="photo-frame dialog-photo">
+        <img src="/images/{course.id === 'basic' ? 'aerial' : course.image}.webp" alt="" />
+      </div>
+      <div class="dialog-copy">
+        <h2 class="text-section font-medium text-white" id="course-dialog-title">{course.title}</h2>
+        <div class="my-1 flex flex-wrap items-center gap-2">
+          <p>授課老師：{course.teacher}</p>
+          <span class="course-chip bg-brand!">60 min</span>
+        </div>
+        <p class="my-4">
+          {#if course.id === 'basic'}
+            {aerialDescription.slice(0, 4).join('，')}。<br />{aerialDescription
+              .slice(4)
+              .join('，')}。
+          {:else}{course.detail}{/if}
+        </p>
+        <Button
+          href="/reservation?plan=first&level={course.level}&course={course.id}"
+          variant="light"
+          class="text-xl"
+        >
+          立即預約
+        </Button>
+      </div>
+    </div>
+  {/if}
+</dialog>
+
+<style>
+  dialog {
+    margin: auto;
+    max-height: min(100dvh - 30px, 760px);
+    width: min(920px, 100% - 30px);
+    max-width: none;
+    border-radius: var(--radius-card);
+    background: var(--color-rose);
+    color: white;
+  }
+  dialog[open] {
+    animation: appear 260ms var(--ease-yoga) both;
+  }
+  dialog::backdrop {
+    background: rgb(106 83 85 / 24%);
+  }
+  .dialog-body {
+    position: relative;
+    display: grid;
+    gap: 16px;
+    align-content: start;
+    min-height: 582px;
+    padding: 32px 16px 24px;
+  }
+  .dialog-photo {
+    width: min(165px, 70%);
+    aspect-ratio: 1;
+    margin-inline: auto;
+  }
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @media (min-width: 768px) {
+    dialog {
+      width: min(920px, 100% - 78px);
+    }
+    .dialog-body {
+      grid-template-columns: minmax(0, 264fr) minmax(0, 358fr);
+      align-items: center;
+      gap: 20px;
+      min-height: 0;
+      padding: 64px 24px;
+    }
+    .dialog-photo {
+      width: 100%;
+      height: 418px;
+      aspect-ratio: auto;
+    }
+  }
+  @media (min-width: 1024px) {
+    .dialog-body {
+      grid-template-columns: minmax(0, 418fr) minmax(0, 350fr);
+      padding: 64px 56px;
+      gap: 40px;
+    }
+  }
+</style>
