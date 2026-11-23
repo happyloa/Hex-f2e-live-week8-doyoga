@@ -1,5 +1,6 @@
 <script lang="ts">
   import X from '@lucide/svelte/icons/x';
+  import { onMount } from 'svelte';
   import { aerialDescription } from '#lib/content.ts';
   import type { Course } from '#lib/content.ts';
   import Button from '#lib/ui/Button.svelte';
@@ -12,9 +13,27 @@
     if (course && !dialog.open) dialog.showModal();
     if (!course && dialog.open) dialog.close();
   });
+
+  onMount(() => {
+    if ('closedBy' in HTMLDialogElement.prototype) return;
+
+    const element = dialog;
+    function dismissOnBackdrop(event: MouseEvent) {
+      if (event.target !== element) return;
+
+      const { top, right, bottom, left } = element.getBoundingClientRect();
+      const { clientX, clientY } = event;
+      if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
+        element.close();
+      }
+    }
+
+    element.addEventListener('click', dismissOnBackdrop);
+    return () => element.removeEventListener('click', dismissOnBackdrop);
+  });
 </script>
 
-<dialog bind:this={dialog} aria-labelledby="course-dialog-title" {onclose}>
+<dialog bind:this={dialog} aria-labelledby="course-dialog-title" closedby="any" {onclose}>
   {#if course}
     <div class="dialog-body">
       <form method="dialog" class="absolute right-3 top-3">
