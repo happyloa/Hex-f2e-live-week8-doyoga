@@ -72,7 +72,7 @@
       </strong>
     </p>
     <form
-      class="booking-form shell mt-6 max-w-87.5 space-y-8 text-brand md:mt-2 md:max-w-[330px] lg:mt-6 lg:max-w-87.5"
+      class="booking-form shell mt-[31px] max-w-87.5 space-y-8 text-ink md:mt-2 md:max-w-[330px] lg:mt-6 lg:max-w-87.5"
       method="post"
       onsubmit={submit}
     >
@@ -81,7 +81,7 @@
         <div class="flex gap-7">
           {#each ['是', '否'] as item (item)}
             <label class="flex cursor-pointer items-center gap-1">
-              <input type="radio" name="experience" value={item} required />{item}
+              <input type="radio" name="experience" value={item} checked={item === '是'} required />{item}
             </label>
           {/each}
         </div>
@@ -101,12 +101,12 @@
         <div class="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-y-1">
           {#each exercise as item (item)}
             <label class="flex cursor-pointer items-center gap-1">
-              <input type="radio" name="exercise" value={item} required />{item}
+              <input type="radio" name="exercise" value={item} checked={item === exercise[0]} required />{item}
             </label>
           {/each}
         </div>
       </fieldset>
-      <div class="field">
+      <div class="field date-field">
         <label for="booking-date">4. 上課預約報到日</label>
         <p id="date-help" class="text-sm">
           若還沒有確定的日期，可以等待專員與您聯絡時再做詳細的諮詢哦！
@@ -114,7 +114,7 @@
         <input
           id="booking-date"
           name="date"
-          class="control w-fit!"
+          class="control w-[118px]! px-2! uppercase"
           type="date"
           aria-describedby="date-help"
         />
@@ -196,7 +196,7 @@
             </p>{/if}
         </div>
       </fieldset>
-      <Button type="submit" class="w-full text-xl" disabled={submitting}>送出</Button>
+      <Button type="submit" class="-mt-0.5 w-full text-xl" disabled={submitting}>送出</Button>
       <p class="-mt-6 text-sm">此表單供作業示範，請使用測試資料。</p>
     </form>
   {:else}
@@ -209,7 +209,11 @@
 
 <style>
   .details-page {
-    padding-bottom: 56px;
+    padding-bottom: 60px;
+  }
+  .date-field {
+    gap: 7px;
+    color: var(--color-ink);
   }
   .booking-form .control {
     min-height: 36px;
@@ -228,7 +232,7 @@
   }
   input[type='radio'],
   input[type='checkbox'] {
-    accent-color: var(--color-brand);
+    accent-color: var(--color-rose);
     margin: 0;
     flex: 0 0 auto;
   }

@@ -53,9 +53,9 @@
   />
 </svelte:head>
 
-<div class="page-space">
-  <BookingSteps current={1} />
-  <section class="shell -mt-2 md:-mt-4" aria-labelledby="choose-plan-heading">
+<div class="pt-[var(--page-space)] pb-22 md:pb-20 lg:pb-26">
+  <BookingSteps current={1} onreset={selection ? reset : undefined} />
+  <section class="shell" aria-labelledby="choose-plan-heading">
     <h2 id="choose-plan-heading" tabindex="-1" class="sr-only" bind:this={chooseHeading}>
       選擇方案
     </h2>
@@ -79,11 +79,8 @@
       <div
         class="my-6 flex justify-center gap-3 text-brand lg:my-4 lg:grid lg:min-h-10 lg:grid-cols-3 lg:gap-[30px]"
       >
-        <button class="underline underline-offset-4 lg:hidden" type="button" onclick={reset}>
-          重新選擇方案
-        </button>
         <ChevronDown
-          size={25}
+          size={24}
           class="lg:justify-self-center"
           style={`grid-column: ${plans.findIndex((plan) => plan.id === selection?.plan) + 1}`}
           aria-hidden="true"
@@ -96,14 +93,18 @@
     <div bind:this={levelBlock} tabindex="-1" class="scroll-mt-4">
       <LevelPicker selected={selection.level} onchange={chooseLevel} />
     </div>
-    <div class="shell mt-10 text-center text-brand" aria-live="polite">
+    <div class="shell mt-10 text-center text-brand md:max-lg:mt-8" aria-live="polite">
       <p>您選擇的是</p>
       <p class="mt-1 text-lead underline underline-offset-4">{selectionLabel(selection)}</p>
       {#if courseTitle}<p class="mt-1 text-sm">{courseTitle}</p>{/if}
     </div>
   {/if}
 
-  <section class="shell mt-8 max-w-[445px] text-brand" aria-labelledby="reservation-notes">
+  <section
+    class="reservation-notes shell max-w-[445px] text-brand"
+    class:has-selection={Boolean(selection)}
+    aria-labelledby="reservation-notes"
+  >
     <h2 id="reservation-notes" class="mb-4 text-center text-section font-medium">預約須知</h2>
     <ol class="list-inside list-decimal space-y-1">
       {#each reservationNotes as note (note)}<li>{note}</li>{/each}
@@ -116,3 +117,25 @@
       </Button>{/if}
   </section>
 </div>
+
+<style>
+  .reservation-notes {
+    margin-top: 40px;
+  }
+  .reservation-notes.has-selection {
+    margin-top: 32px;
+  }
+  @media (min-width: 768px) {
+    .reservation-notes {
+      margin-top: 48px;
+    }
+    .reservation-notes.has-selection {
+      margin-top: 40px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .reservation-notes:not(.has-selection) {
+      margin-top: 32px;
+    }
+  }
+</style>

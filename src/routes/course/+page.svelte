@@ -61,8 +61,8 @@
   />
 </svelte:head>
 
-<div class="shell pt-[var(--page-space)] pb-12 lg:pb-16">
-  <PageHeading title="課程介紹" />
+<div class="shell pt-[var(--page-space)] pb-12 md:pb-18 lg:pb-16">
+  <PageHeading title="課程介紹" class="font-normal max-lg:mb-6" />
   <section class="featured" aria-labelledby="featured-course">
     <div class="photo-frame">
       <Photo
@@ -73,14 +73,14 @@
       />
     </div>
     <div class="featured-copy">
-      <h2 id="featured-course" class="text-2xl font-medium lg:text-section">
+      <h2 id="featured-course" class="text-section font-medium">
         本月限定課程 - 空中瑜珈
       </h2>
       <div class="mt-1 flex flex-wrap items-center gap-2 text-brand">
         <p>授課老師：Carol Tang</p>
         <span class="course-chip">60 min</span>
       </div>
-      <p class="my-4 text-brand">
+      <p class="featured-description mt-[13px] mb-4 text-brand">
         {#each aerialDescription as line (line)}{line}<br />{/each}
       </p>
       <Button href="/reservation?plan=first&level=basic&course=aerial" class="text-xl">
@@ -119,7 +119,7 @@
   </form>
 </div>
 
-<section class="shell catalog py-12 lg:py-[54px]" aria-label="課程列表">
+<section class="shell catalog pt-[46px] pb-[18px] md:pt-[54px]" aria-label="課程列表">
   <div>
     <p class="sr-only" aria-live="polite">找到 {filtered.length} 堂課程</p>
     {#if filtered.length}
@@ -164,8 +164,14 @@
   }
   .search-form {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(101px, auto);
+    grid-template-columns: minmax(0, 1fr) 106px;
     gap: 8px;
+  }
+  .search-form .control {
+    height: 36px;
+    min-height: 36px;
+    padding-block: 4px;
+    line-height: 24px;
   }
   .filter {
     width: auto;
@@ -187,7 +193,7 @@
       height: 341px;
     }
     .search-form {
-      grid-template-columns: minmax(260px, 348px) auto;
+      grid-template-columns: 270px 106px;
       justify-content: start;
     }
     .course-grid {
@@ -199,6 +205,9 @@
     }
   }
   @media (min-width: 1024px) {
+    .search-form {
+      grid-template-columns: 350px 106px;
+    }
     .featured {
       width: min(920px, 100%);
       margin-inline: auto;
@@ -207,6 +216,7 @@
     .catalog {
       grid-template-columns: minmax(0, 825fr) minmax(0, 255fr);
       gap: 30px;
+      padding-bottom: 72px;
     }
     .course-grid {
       grid-template-columns: minmax(0, 350fr) minmax(0, 65fr) minmax(0, 350fr);
@@ -225,12 +235,16 @@
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    .featured-description {
+      width: calc(100% + 20px);
+      max-width: 350px;
+    }
     .course-grid {
       row-gap: 44px;
     }
     .catalog {
-      row-gap: 64px;
-      padding-bottom: 100px;
+      row-gap: 40px;
+      padding-bottom: 128px;
     }
   }
 </style>

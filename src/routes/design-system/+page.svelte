@@ -42,7 +42,7 @@
   <section aria-labelledby="type-title">
     <h2 class="mb-4 text-lead font-medium" id="type-title">字型</h2>
     <div class="rounded-card bg-sand p-6">
-      <p class="text-sm text-brand">Noto Sans TC</p>
+      <p class="text-sm text-brand">思源黑體 TW</p>
       <p class="mt-2 text-4xl text-brand">DOYOGA，做你的瑜珈</p>
       <p class="mt-3 text-section text-brand">感受身心，活在當下</p>
       <p class="mt-3">多給自己一點時間享受靜謐，傾聽內心的聲音。</p>

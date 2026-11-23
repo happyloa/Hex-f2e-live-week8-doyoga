@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Menu from '@lucide/svelte/icons/menu';
   import X from '@lucide/svelte/icons/x';
   import { afterNavigate } from '$app/navigation';
   import { page } from '$app/state';
@@ -31,7 +30,7 @@
     >
       <img src="/images/shared/logo.webp" width="96" height="31" alt="DOYOGA" />
     </a>
-    <nav class="desktop-nav" aria-label="主選單">
+    <nav class="desktop-nav font-[350]" aria-label="主選單">
       {#each navigation as item (item.href)}
         <a href={item.href} aria-current={page.url.pathname === item.href ? 'page' : undefined}>
           {item.label}
@@ -39,8 +38,8 @@
       {/each}
     </nav>
     <div class="desktop-actions gap-4">
-      <Button href="/reservation" variant="outline" class="rounded-full!">立即預約</Button>
-      <Button href="/contact" variant="outline" class="rounded-full!">聯絡我們</Button>
+      <Button href="/reservation" variant="outline" class="rounded-full! border-rose! font-[350]">立即預約</Button>
+      <Button href="/contact" variant="outline" class="rounded-full! border-rose! font-[350]">聯絡我們</Button>
     </div>
     <button
       class="header-toggle icon-button"
@@ -53,7 +52,7 @@
       aria-expanded={open}
       aria-controls="mobile-navigation"
     >
-      {#if open}<X size={32} />{:else}<Menu size={34} />{/if}
+      {#if open}<X size={32} />{:else}<span class="menu-icon" aria-hidden="true"></span>{/if}
     </button>
   </div>
   <nav id="mobile-navigation" class="mobile-nav" aria-label="行動版主選單" hidden={!open}>
@@ -99,8 +98,15 @@
       transform: translateY(0);
     }
   }
-  nav a:hover,
-  nav a[aria-current='page'] {
+  .header-toggle {
+    margin-right: 3px;
+  }
+  .menu-icon {
+    width: 34px;
+    height: 25px;
+    background: repeating-linear-gradient(to bottom, currentColor 0 4px, transparent 4px 7px);
+  }
+  nav a:hover {
     color: var(--color-brand-dark);
     text-decoration: underline;
     text-underline-offset: 6px;

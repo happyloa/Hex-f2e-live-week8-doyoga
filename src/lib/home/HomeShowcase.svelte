@@ -8,7 +8,7 @@
   const homeTeachers = [teachers[0], teachers[1], teachers[3]];
 </script>
 
-<section class="section-space bg-sand" aria-labelledby="home-teachers" {@attach reveal}>
+<section class="section-space teacher-section bg-sand" aria-labelledby="home-teachers" {@attach reveal}>
   <div class="shell split teacher-split">
     <div class="photo-frame hidden lg:block">
       <Photo name="aerial" sizes="540px" alt="老師在瑜珈課中協助學員調整動作" loading="lazy" />
@@ -44,7 +44,7 @@
   </div>
 </section>
 
-<section class="section-space" aria-labelledby="home-space" {@attach reveal}>
+<section class="section-space space-section" aria-labelledby="home-space" {@attach reveal}>
   <div class="shell split space-split">
     <div class="space-photos">
       <div class="photo-frame space-main">
@@ -109,7 +109,6 @@
                 sizes="(min-width: 1024px) 445px, (min-width: 768px) 21vw, 45vw"
                 alt=""
                 loading="lazy"
-                style={`object-position: ${course.position}`}
               />
             </a>
           </li>
@@ -152,6 +151,9 @@
   .space-extra {
     display: none;
   }
+  .space-extra :global(img) {
+    object-position: center 56%;
+  }
   .preview-layout {
     display: grid;
     gap: 16px;
@@ -160,7 +162,7 @@
   .preview-track {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
+    gap: 16px 15px;
   }
   .preview-track a {
     aspect-ratio: 1;
@@ -169,8 +171,22 @@
     display: none;
   }
   @media (max-width: 767px) {
-    .teacher-header {
+    .space-main :global(img) {
+      object-position: 37% center;
+    }
+    .teacher-section {
+      padding-block: 32px 48px;
+    }
+    .teacher-header h2 {
       text-align: center;
+    }
+    .space-section,
+    .preview-section {
+      padding-block: 48px;
+    }
+    .space-split,
+    .preview-layout {
+      gap: 8px;
     }
     .space-copy {
       grid-row: 1;
@@ -217,6 +233,22 @@
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    .teacher-section {
+      padding-top: 32px;
+    }
+    .space-section,
+    .preview-section {
+      padding-block: 56px;
+    }
+    .space-photos {
+      row-gap: 32px;
+    }
+    .space-photos .space-main {
+      height: 266px;
+    }
+    .preview-track {
+      row-gap: 24px;
+    }
     .teacher-header h2 {
       text-align: center;
     }

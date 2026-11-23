@@ -21,8 +21,8 @@
   />
 </svelte:head>
 
-<div class="shell page-space">
-  <PageHeading title="聯絡我們" />
+<div class="shell contact-page pt-[var(--page-space)]">
+  <PageHeading title="聯絡我們" class="max-md:mb-6 md:max-lg:font-normal" />
   <div class="contact-layout">
     <section aria-labelledby="location-heading" class="text-brand">
       <a
@@ -39,7 +39,7 @@
           fetchpriority="high"
         />
       </a>
-      <h2 class="mb-2 mt-4 text-2xl" id="location-heading">DOYOGA 教室位置</h2>
+      <h2 class="mb-2 mt-6 text-2xl" id="location-heading">DOYOGA 教室位置</h2>
       <p>{address}</p>
       <h3 class="mt-2">如何前往：</h3>
       <ol class="list-inside list-decimal space-y-5">
@@ -49,8 +49,8 @@
       </ol>
     </section>
 
-    <section class="rounded-card bg-sand p-6 text-brand md:p-8" aria-labelledby="feedback-heading">
-      <h2 class="mb-5 text-lead" id="feedback-heading">意見回饋＆問題詢問</h2>
+    <section class="feedback rounded-card bg-sand text-brand" aria-labelledby="feedback-heading">
+      <h2 class="mb-4 text-lead md:mb-6" id="feedback-heading">意見回饋&amp;問題詢問</h2>
       <form
         method="post"
         class="grid gap-4"
@@ -102,7 +102,7 @@
         </div>
         <div class="flex items-center justify-end gap-4">
           {#if sent}<p class="text-sm" role="status">已完成回饋表單示範。</p>{/if}
-          <Button type="submit">送出</Button>
+          <Button type="submit" class="min-h-9! px-[11px]! py-[5px]!">送出</Button>
         </div>
       </form>
     </section>
@@ -110,24 +110,55 @@
 </div>
 
 <style>
+  .contact-page {
+    padding-bottom: 88px;
+  }
   .contact-layout {
     display: grid;
-    gap: 32px;
+    gap: 52px;
     align-items: start;
   }
   .map {
-    aspect-ratio: 1.76;
+    aspect-ratio: 345 / 195;
+  }
+  .feedback {
+    padding: 32px 32px 24px;
+  }
+  .feedback input {
+    min-height: 36px;
+    padding-block: 6px;
+  }
+  @media (min-width: 768px) {
+    .feedback {
+      padding-bottom: 40px;
+    }
+    .feedback input {
+      padding-block: 5px;
+    }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    .contact-page {
+      padding-bottom: 80px;
+    }
     .contact-layout {
       max-width: 570px;
       margin-inline: auto;
+      gap: 100px;
+    }
+    .map {
+      aspect-ratio: 570 / 323;
     }
   }
   @media (min-width: 1024px) {
+    .contact-page {
+      padding-bottom: 110px;
+    }
     .contact-layout {
       grid-template-columns: minmax(0, 635fr) minmax(0, 445fr);
       gap: 30px;
+    }
+    .map {
+      aspect-ratio: 635 / 360;
     }
   }
 </style>

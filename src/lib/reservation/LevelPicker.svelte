@@ -55,6 +55,7 @@
     gap: 24px;
   }
   .level-card {
+    position: relative;
     display: block;
     min-width: 0;
     min-height: 215px;

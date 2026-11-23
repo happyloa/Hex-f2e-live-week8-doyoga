@@ -32,13 +32,13 @@
 
 <style>
   .teacher-section {
-    padding-block: 32px 72px;
+    padding-block: 36px 98px;
     overflow: hidden;
   }
   .teacher-track {
     display: grid;
-    gap: 64px;
-    padding-top: 75px;
+    gap: 71px;
+    padding-top: 71px;
   }
   .teacher-card {
     position: relative;
@@ -56,6 +56,9 @@
     border-radius: 50%;
   }
   @media (min-width: 768px) {
+    .teacher-section {
+      padding-top: 32px;
+    }
     .teacher-track {
       display: flex;
       gap: 30px;
@@ -63,10 +66,19 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
+      padding-top: 72px;
     }
     .teacher-card {
       flex: 0 0 min(350px, 47%);
       scroll-snap-align: start;
+    }
+  }
+  @media (min-width: 1024px) {
+    .teacher-section {
+      padding-bottom: 65px;
+    }
+    .teacher-track {
+      padding-top: 79px;
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {

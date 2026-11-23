@@ -64,6 +64,6 @@ npm run verify
 ## 圖片與字型
 
 - 圖片統一使用 WebP，依版面提供數種寬度。手機首頁使用與設計稿構圖相同的裁切版本，標誌和頭像保留透明背景。
-- 思源黑體繁中（Noto Sans TC）依介面文案產生 WOFF2 子集。新增文案後可用 `npm run font:subset` 更新字型，正式建置直接使用已提交的檔案。授權見 `src/lib/fonts/OFL.txt`。
+- Adobe XD 文字圖層指定思源黑體 TW（Source Han Sans TW）。網站使用依文案產生的 WOFF2 子集，授權見 `src/lib/fonts/OFL.txt`。正式建置直接使用已提交的字型。需要更新字型時，先在 Python 環境安裝 FontTools，再執行 `npm run font:subset`。也可用 `DOYOGA_FONT_PYTHON` 指定已安裝 FontTools 的 Python 執行檔。
 
 本專案為切版練習。設計稿、圖片與品牌素材屬原作者所有。

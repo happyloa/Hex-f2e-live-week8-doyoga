@@ -18,7 +18,7 @@
 
 <HomeIntro />
 <HomeShowcase />
-<section class="section-space shell" aria-labelledby="home-plans">
+<section class="shell pt-8 pb-12 md:pt-10 md:pb-14 lg:pb-16" aria-labelledby="home-plans">
   <SectionHeading title="方案選擇" subtitle="DOYOGA 可以帶給你..." id="home-plans" />
   <div
     class="reveal-stagger mt-6 grid gap-4 md:gap-6 lg:mt-8 lg:grid-cols-3 lg:gap-[30px]"

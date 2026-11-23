@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'DOYOGA Noto Sans TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --font-sans: 'DOYOGA Han Sans', 'Source Han Sans TW', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
   --color-ink: #707070;
   --color-brand: #907a7b;
   --color-brand-dark: #6a5355;
@@ -89,7 +89,7 @@
     @apply mb-8 text-center text-section font-medium;
   }
   .button {
-    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-control px-4 py-2 text-center font-normal;
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-control px-[15px] py-2 text-center font-normal;
     transition:
       background var(--motion-time),
       color var(--motion-time),

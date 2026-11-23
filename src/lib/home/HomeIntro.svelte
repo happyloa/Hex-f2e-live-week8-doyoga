@@ -94,7 +94,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 51% 62%;
+    object-position: 48.5% center;
   }
   .hero-inner {
     display: flex;
@@ -143,7 +143,7 @@
       min-height: 582px;
     }
     .hero-media img {
-      object-position: center 73%;
+      object-position: center;
     }
     .hero-copy h1 {
       font-size: 36px;
@@ -162,20 +162,15 @@
   }
   @media (min-width: 1024px) {
     .hero-media img {
-      object-position: center bottom;
+      object-position: center 98.5%;
     }
     .hero-copy {
       margin-left: calc((100% + 30px) / 12);
     }
   }
   @media (max-width: 767px) {
-    .hero::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 27% 0 26%;
-      background: linear-gradient(90deg, rgb(235 233 235 / 65%), transparent 95%);
-      mask-image: linear-gradient(transparent, #000 26% 74%, transparent);
+    .hero-copy > div {
+      margin-top: 38px;
     }
   }
 </style>

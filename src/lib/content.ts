@@ -11,7 +11,6 @@ export const courses = [
     teacher: 'Carol Tang',
     image: 'basic',
     level: 'basic',
-    position: 'center 37%',
     detail: '從站姿、坐姿與呼吸開始，熟悉瑜珈的基礎動作和身體順位，循序練習柔軟度、穩定度與平衡。',
   },
   {
@@ -20,7 +19,6 @@ export const courses = [
     teacher: 'Kanae',
     image: 'iyengar',
     level: 'intermediate',
-    position: 'center',
     detail: '運用瑜珈磚、伸展帶等輔具，練習更穩定的肌肉控制，理解每個體位的正確排列。',
   },
   {
@@ -29,7 +27,6 @@ export const courses = [
     teacher: 'Kuzuha',
     image: 'hatha',
     level: 'intermediate',
-    position: 'center 39%',
     detail: '配合呼吸進入各式體位，引導身體在力量與放鬆之間保持平衡。',
   },
   {
@@ -38,7 +35,6 @@ export const courses = [
     teacher: 'Kuzuha',
     image: 'universal',
     level: 'intermediate',
-    position: 'center',
     detail: '結合體位、觀想和呼吸，從不同方向伸展身體，專注於動作之間的連接。',
   },
   {
@@ -47,7 +43,6 @@ export const courses = [
     teacher: 'Kuzuha、Kanae',
     image: 'arco',
     level: 'intermediate',
-    position: 'center 24%',
     detail: '以雙人合作練習支撐與平衡，由老師指導安全的進出動作，逐步培養默契。',
   },
   {
@@ -56,7 +51,6 @@ export const courses = [
     teacher: 'Kanae',
     image: 'ashtanga',
     level: 'advanced',
-    position: 'center',
     detail: '以固定的體位序列配合呼吸，從流動的動作訓練專注、耐力與核心穩定。',
   },
   {
@@ -65,7 +59,6 @@ export const courses = [
     teacher: 'Asa Chen',
     image: 'yin-yang',
     level: 'advanced',
-    position: 'center 64%',
     detail: '練習動態的陽瑜珈與靜態的陰瑜珈，在肌力練習後透過停留與呼吸逐步放鬆。',
   },
   {
@@ -74,7 +67,6 @@ export const courses = [
     teacher: 'Asa Chen',
     image: 'practice-room',
     level: 'basic',
-    position: 'center',
     detail: '在柔和香氣中配合呼吸緩慢伸展，釋放日常累積的肩頸與背部緊繃。',
   },
 ] as const;

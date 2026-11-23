@@ -18,7 +18,7 @@
         <label class="sr-only" for="newsletter-email">輸入您的電子信箱</label>
         <div class="flex">
           <input
-            class="min-w-0 grow rounded-l-control bg-white px-4 py-2 text-lg text-ink placeholder:text-brand"
+            class="min-w-0 grow rounded-l-control bg-white px-4 text-lead text-ink placeholder:text-brand"
             id="newsletter-email"
             type="email"
             placeholder="輸入您的電子信箱"
@@ -29,7 +29,7 @@
             required
           />
           <button
-            class="shrink-0 whitespace-nowrap rounded-r-control bg-rose px-4 py-2 text-xl hover:bg-brand-dark"
+            class="h-[45px] shrink-0 whitespace-nowrap rounded-r-control bg-rose px-4 text-lead hover:bg-brand-dark"
             type="submit"
           >
             訂閱
@@ -57,8 +57,8 @@
   .signup {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-block: 24px;
+    gap: 12px;
+    padding-block: 24px 25px;
   }
   .signup-form {
     width: min(100%, 350px);
@@ -83,7 +83,11 @@
   }
   @media (min-width: 768px) {
     .signup {
-      padding-block: 32px;
+      gap: 8px;
+      padding-block: 32px 31px;
+    }
+    .signup-form {
+      width: min(100%, 330px);
     }
     .footer-content {
       grid-template-columns: 1fr auto 1fr;
@@ -103,6 +107,9 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+    }
+    .signup-form {
+      width: min(100%, 350px);
     }
   }
 </style>

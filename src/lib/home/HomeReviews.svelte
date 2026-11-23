@@ -7,10 +7,10 @@
   let track: HTMLElement | undefined = $state();
 </script>
 
-<section class="bg-sand section-space" aria-labelledby="reviews-title" {@attach reveal}>
+<section class="bg-sand pt-8 pb-12 md:pt-10 md:pb-4 lg:pb-16" aria-labelledby="reviews-title" {@attach reveal}>
   <div class="shell">
     <SectionHeading title="聽聽他們怎麼說" id="reviews-title" />
-    <ul class="review-track mt-6 lg:mt-8" bind:this={track}>
+    <ul class="review-track mt-6 md:mt-8" bind:this={track}>
       {#each testimonials as [name, quote, avatar] (name)}
         <li class="flex items-center gap-5 rounded-card bg-white p-4 text-brand">
           <img src="/images/home/{avatar}" width="60" height="60" alt="" loading="lazy" />

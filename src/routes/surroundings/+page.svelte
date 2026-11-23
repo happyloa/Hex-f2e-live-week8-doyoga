@@ -43,7 +43,7 @@
   <div class="studio-layout">
     <div class="room-gallery">
       {#each rooms as room, index (room.image)}
-        <figure class="room photo-frame" class:wide={index === 0}>
+        <figure class="room photo-frame" class:wide={index === 0} data-room={room.image}>
           <Photo
             name={room.image}
             sizes={index === 0
@@ -54,7 +54,7 @@
             fetchpriority={index === 0 ? 'high' : undefined}
           />
           <figcaption>
-            <h2 class="text-xl text-white lg:text-section">{room.title}</h2>
+            <h2 class="text-section text-white md:max-lg:text-lead">{room.title}</h2>
             <p>{room.description}</p>
           </figcaption>
         </figure>
@@ -83,7 +83,6 @@
                 sizes="(min-width: 1024px) 255px, (min-width: 768px) calc((100vw - 138px) / 3), 255px"
                 alt=""
                 loading="lazy"
-                style={`object-position: ${course.position}`}
               />
             </div>
             <h3 class="mt-2 text-lead">{course.title}</h3>
@@ -112,7 +111,15 @@
     inset: auto 0 0;
     padding: 44px 24px 24px;
     color: white;
-    background: linear-gradient(transparent, rgb(0 0 0 / 66%));
+    text-shadow: 0 1px 2px rgb(0 0 0 / 35%);
+  }
+  [data-room='equipment'] :global(img) {
+    object-position: center 27%;
+  }
+  @media (max-width: 767px) {
+    [data-room='group-studio'] :global(img) {
+      object-position: left center;
+    }
   }
   .recommendations {
     overflow: hidden;

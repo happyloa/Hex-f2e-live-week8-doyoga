@@ -48,7 +48,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid var(--color-rose);
+    outline: 1px solid var(--color-rose);
+    outline-offset: -1px;
     border-radius: var(--radius-card);
     min-height: 497px;
   }

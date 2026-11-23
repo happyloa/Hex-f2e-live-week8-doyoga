@@ -58,11 +58,10 @@
           <p>授課老師：{course.teacher}</p>
           <span class="course-chip bg-brand!">60 min</span>
         </div>
-        <p class="my-4">
+        <p class="dialog-description mb-4">
           {#if course.id === 'basic'}
-            {aerialDescription.slice(0, 4).join('，')}。<br />{aerialDescription
-              .slice(4)
-              .join('，')}。
+            {aerialDescription[0]}<span class="md:hidden">，</span><br class="hidden md:inline" />{aerialDescription[1]}，{aerialDescription[2]}。<br />
+            {aerialDescription[3]}。<br />{aerialDescription.slice(4).join('，')}。
           {:else}{course.detail}{/if}
         </p>
         <Button
@@ -91,7 +90,7 @@
     animation: appear 260ms var(--ease-yoga) both;
   }
   dialog::backdrop {
-    background: rgb(106 83 85 / 24%);
+    background: var(--color-paper);
   }
   .dialog-body {
     position: relative;
@@ -105,6 +104,9 @@
     width: min(165px, 70%);
     aspect-ratio: 1;
     margin-inline: auto;
+  }
+  .dialog-description {
+    margin-top: 9px;
   }
   @keyframes appear {
     from {
@@ -120,6 +122,12 @@
     dialog {
       width: min(920px, 100% - 78px);
     }
+    dialog::backdrop {
+      background: rgb(142 123 123 / 30%);
+    }
+    .dialog-description {
+      margin-top: 13px;
+    }
     .dialog-body {
       grid-template-columns: minmax(0, 264fr) minmax(0, 358fr);
       align-items: center;
@@ -134,6 +142,9 @@
     }
   }
   @media (min-width: 1024px) {
+    dialog::backdrop {
+      background: transparent;
+    }
     .dialog-body {
       grid-template-columns: minmax(0, 418fr) minmax(0, 350fr);
       padding: 64px 56px;
