@@ -1,22 +1,33 @@
 <script lang="ts">
   import { plans } from '#lib/content.ts';
   import Button from '#lib/ui/Button.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
 
   let {
     plan,
     booking = false,
     selected = false,
+    priority = false,
     onclick,
   }: {
     plan: (typeof plans)[number];
     booking?: boolean;
     selected?: boolean;
+    priority?: boolean;
     onclick?: () => void;
   } = $props();
 </script>
 
 <article class="plan-card {selected ? 'is-selected' : ''}">
-  <img src="/images/{plan.image}.webp" class="plan-photo" alt="" loading="lazy" />
+  <div class="plan-photo">
+    <Photo
+      name={plan.image}
+      sizes="(min-width: 1024px) 350px, (min-width: 768px) calc((100vw - 78px) / 2), calc(100vw - 30px)"
+      alt=""
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+    />
+  </div>
   <div class="plan-body">
     <h3 class="text-lead">{plan.title}</h3>
     <p class="mt-1 text-lead text-rose">{plan.price}</p>
@@ -39,14 +50,21 @@
     overflow: hidden;
     border: 1px solid var(--color-rose);
     border-radius: var(--radius-card);
+    min-height: 497px;
   }
   .plan-card.is-selected {
     outline: 3px solid var(--color-rose);
     outline-offset: -3px;
   }
   .plan-photo {
-    width: 100%;
+    position: relative;
     height: 243px;
+  }
+  .plan-photo :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   .plan-body {
@@ -58,15 +76,26 @@
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     .plan-card {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: 238px;
     }
     .plan-photo {
-      width: 50%;
-      min-height: 238px;
       height: auto;
     }
     .plan-body {
       text-align: left;
+      padding-block: 22px;
+    }
+  }
+  @media (max-width: 1023px) {
+    .plan-body :global(.button-dark) {
+      border-color: var(--color-rose);
+      background: var(--color-rose);
+    }
+    .plan-body :global(.button-dark:hover) {
+      border-color: var(--color-brand);
+      background: var(--color-brand);
     }
   }
 </style>

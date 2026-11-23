@@ -1,6 +1,8 @@
 <script lang="ts">
   import { reveal } from '#lib/motion.ts';
+  import { heroMobile, imageSrcset, photos } from '#lib/images.ts';
   import Button from '#lib/ui/Button.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
   import SectionHeading from '#lib/ui/SectionHeading.svelte';
 
   const benefits = [
@@ -19,11 +21,22 @@
       photo: 'sculpt',
       text: '幫助強化背部與腹部的核心肌群，增進我們身體穩定度以及保持良好體態。',
     },
-  ];
+  ] as const;
 </script>
 
 <section class="hero" aria-labelledby="hero-heading">
-  <img src="/images/hero.webp" width="1350" height="900" alt="" fetchpriority="high" />
+  <picture class="hero-media">
+    <source media="(max-width: 560px)" srcset={heroMobile} />
+    <img
+      src={photos.hero.src}
+      srcset={imageSrcset('hero')}
+      sizes="(max-width: 767px) 840px, (max-width: 1023px) 873px, 100vw"
+      width={photos.hero.width}
+      height={photos.hero.height}
+      alt=""
+      fetchpriority="high"
+    />
+  </picture>
   <div class="shell hero-inner">
     <div class="hero-copy">
       <p>健身輕時尚</p>
@@ -50,7 +63,12 @@
   <ul class="mt-6 grid gap-4 md:grid-cols-3 md:gap-[30px] lg:mt-8">
     {#each benefits as benefit (benefit.photo)}
       <li class="benefit photo-frame">
-        <img src="/images/{benefit.photo}.webp" alt="" loading="lazy" />
+        <Photo
+          name={benefit.photo}
+          sizes="(min-width: 1024px) 350px, (min-width: 768px) 30vw, calc(100vw - 30px)"
+          alt=""
+          loading="lazy"
+        />
         <div class="benefit-copy">
           <h3 class="text-lead text-white">{benefit.title}</h3>
           <p class="mt-1">{benefit.text}</p>
@@ -67,10 +85,12 @@
     background: #dedde1;
     color: var(--color-ink);
   }
-  .hero > img {
+  .hero-media {
     position: absolute;
     z-index: -2;
     inset: 0;
+  }
+  .hero-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -122,7 +142,7 @@
     .hero-inner {
       min-height: 582px;
     }
-    .hero > img {
+    .hero-media img {
       object-position: center 73%;
     }
     .hero-copy h1 {
@@ -141,7 +161,7 @@
     }
   }
   @media (min-width: 1024px) {
-    .hero > img {
+    .hero-media img {
       object-position: center bottom;
     }
     .hero-copy {

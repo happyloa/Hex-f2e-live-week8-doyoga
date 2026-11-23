@@ -30,12 +30,14 @@
 
 - 首屏文案、手機選單和課程詳情以短距離位移搭配淡入。
 - 頁面區塊進入視窗時播放一次進場動畫。首頁的三張方案卡片依序出現。
-- 首頁課程、學員心得、師資和課程推薦皆可捲動瀏覽。輪播按鈕提供平滑切換。
+- 首頁課程、學員心得、師資和課程推薦支援滑動。箭頭會對齊卡片位置，鍵盤可操作，連按與滑動時可接續切換。
 - 捲動進場採用可重用的 Svelte attachment 和 Intersection Observer，參考 AOS 與 PETPET 作業的進場方式。動畫與平滑捲動都會依系統的減少動態效果設定調整。
 
 ## 開發與部署
 
 需要 Node.js 24 或以上。
+
+GitHub `main` 已連接 Cloudflare Workers Builds。推送後會執行 `npm run verify`，通過型別檢查與建置後部署到正式 Worker。
 
 ```sh
 npm ci
@@ -57,6 +59,11 @@ npm run verify
 - `src/lib/layout` 放共用頁首、頁尾與社群連結。
 - `src/lib/home`、`src/lib/course`、`src/lib/reservation` 放各功能的元件。
 - `src/lib/content.ts`、`src/lib/current-schedule.ts` 放課程、師資、方案和課表資料。
-- `static/images` 放六角學院與 Adobe XD 課程素材，照片使用 WebP。
+- `static/images` 放六角學院與 Adobe XD 課程素材，按首頁 `home`、課程 `course`、場館 `surroundings`、預約 `reservation`、聯絡 `contact` 和共用素材 `shared` 放置。
+
+## 圖片與字型
+
+- 圖片統一使用 WebP，依版面提供數種寬度。手機首頁使用與設計稿構圖相同的裁切版本，標誌和頭像保留透明背景。
+- 思源黑體繁中（Noto Sans TC）依介面文案產生 WOFF2 子集。新增文案後可用 `npm run font:subset` 更新字型，正式建置直接使用已提交的檔案。授權見 `src/lib/fonts/OFL.txt`。
 
 本專案為切版練習。設計稿、圖片與品牌素材屬原作者所有。

@@ -3,6 +3,7 @@
   import { reveal } from '#lib/motion.ts';
   import TextLink from '#lib/ui/TextLink.svelte';
   import CarouselButtons from '#lib/ui/CarouselButtons.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
   let track: HTMLElement | undefined = $state();
   const homeTeachers = [teachers[0], teachers[1], teachers[3]];
 </script>
@@ -10,7 +11,7 @@
 <section class="section-space bg-sand" aria-labelledby="home-teachers" {@attach reveal}>
   <div class="shell split teacher-split">
     <div class="photo-frame hidden lg:block">
-      <img src="/images/aerial.webp" alt="老師在瑜珈課中協助學員調整動作" loading="lazy" />
+      <Photo name="aerial" sizes="540px" alt="老師在瑜珈課中協助學員調整動作" loading="lazy" />
     </div>
     <div>
       <header class="teacher-header">
@@ -22,7 +23,13 @@
       <ul class="teacher-list mt-6 grid gap-4">
         {#each homeTeachers as teacher, index (teacher.name)}
           <li class="teacher-teaser rounded-card bg-white" class:featured={index === 0}>
-            <img src="/images/{teacher.image}" width="94" height="94" alt="" loading="lazy" />
+            <img
+              src="/images/shared/{teacher.image}"
+              width="94"
+              height="94"
+              alt=""
+              loading="lazy"
+            />
             <div>
               <h3 class="text-lead text-ink">{teacher.name} 老師</h3>
               <p class="mt-1">教學經歷 10 年</p>
@@ -41,11 +48,28 @@
   <div class="shell split space-split">
     <div class="space-photos">
       <div class="photo-frame space-main">
-        <img src="/images/practice-room.webp" alt="瑜珈教室中的練習" loading="lazy" />
+        <Photo
+          name="practice-room"
+          sizes="(min-width: 1024px) 350px, (min-width: 768px) 28vw, 45vw"
+          alt="瑜珈教室中的練習"
+          loading="lazy"
+        />
       </div>
-      <div class="photo-frame"><img src="/images/lounge.webp" alt="休息區" loading="lazy" /></div>
+      <div class="photo-frame">
+        <Photo
+          name="lounge"
+          sizes="(min-width: 1024px) 160px, (min-width: 768px) 12vw, 45vw"
+          alt="休息區"
+          loading="lazy"
+        />
+      </div>
       <div class="photo-frame space-extra">
-        <img src="/images/equipment.webp" alt="瑜珈器材" loading="lazy" />
+        <Photo
+          name="equipment"
+          sizes="(min-width: 1024px) 160px, 12vw"
+          alt="瑜珈器材"
+          loading="lazy"
+        />
       </div>
     </div>
     <div class="split-copy space-copy">
@@ -80,11 +104,12 @@
               href="/course?course={course.id}"
               aria-label={course.title}
             >
-              <img
-                src="/images/{course.image}.webp"
+              <Photo
+                name={course.image}
+                sizes="(min-width: 1024px) 445px, (min-width: 768px) 21vw, 45vw"
                 alt=""
                 loading="lazy"
-                style:object-position={course.position}
+                style={`object-position: ${course.position}`}
               />
             </a>
           </li>

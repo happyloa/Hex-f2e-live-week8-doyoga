@@ -14,14 +14,16 @@
     name="description"
     content="DOYOGA 瑜珈課程、專業師資與舒適的練習空間。查看本月課表，選擇適合你的體驗方案。"
   />
-  <link rel="preload" as="image" href="/images/hero.webp" />
 </svelte:head>
 
 <HomeIntro />
 <HomeShowcase />
 <section class="section-space shell" aria-labelledby="home-plans">
   <SectionHeading title="方案選擇" subtitle="DOYOGA 可以帶給你..." id="home-plans" />
-  <div class="reveal-stagger mt-6 grid gap-4 lg:mt-8 lg:grid-cols-3 lg:gap-[30px]" {@attach reveal}>
+  <div
+    class="reveal-stagger mt-6 grid gap-4 md:gap-6 lg:mt-8 lg:grid-cols-3 lg:gap-[30px]"
+    {@attach reveal}
+  >
     {#each plans as plan (plan.id)}<PlanCard {plan} />{/each}
   </div>
 </section>

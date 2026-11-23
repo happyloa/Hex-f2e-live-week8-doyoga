@@ -1,8 +1,8 @@
-@import '@fontsource-variable/noto-sans-tc';
+@import './lib/fonts/ui.css';
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Noto Sans TC Variable', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --font-sans: 'DOYOGA Noto Sans TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
   --color-ink: #707070;
   --color-brand: #907a7b;
   --color-brand-dark: #6a5355;

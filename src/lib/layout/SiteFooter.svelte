@@ -29,7 +29,7 @@
             required
           />
           <button
-            class="rounded-r-control bg-rose px-4 py-2 text-xl hover:bg-brand-dark"
+            class="shrink-0 whitespace-nowrap rounded-r-control bg-rose px-4 py-2 text-xl hover:bg-brand-dark"
             type="submit"
           >
             訂閱
@@ -41,7 +41,7 @@
   </div>
   <div class="shell footer-content">
     <a class="footer-logo" href="/" aria-label="DOYOGA 首頁">
-      <img src="/images/logo-white.png" width="96" height="31" alt="DOYOGA" />
+      <img src="/images/shared/logo-white.webp" width="96" height="31" alt="DOYOGA" />
     </a>
     <SocialLinks class="footer-social text-xl" />
     <nav aria-label="頁尾選單" class="footer-nav">

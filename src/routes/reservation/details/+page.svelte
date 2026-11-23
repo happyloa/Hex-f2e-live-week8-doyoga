@@ -69,7 +69,7 @@
 
 <svelte:head><title>填寫預約資料｜DOYOGA</title></svelte:head>
 
-<div class="page-space">
+<div class="details-page page-space">
   <BookingSteps
     current={2}
     back={selection ? selectionHref('/reservation', selection) : '/reservation'}
@@ -80,7 +80,10 @@
         {selectionLabel(selection)}
       </strong>
     </p>
-    <form class="shell mt-8 max-w-87.5 space-y-8 text-brand" onsubmit={submit}>
+    <form
+      class="booking-form shell mt-6 max-w-87.5 space-y-8 text-brand md:mt-2 md:max-w-[330px] lg:mt-6 lg:max-w-87.5"
+      onsubmit={submit}
+    >
       <fieldset>
         <legend class="mb-4">1. 是否接觸過瑜珈?</legend>
         <div class="flex gap-7">
@@ -93,7 +96,7 @@
       </fieldset>
       <fieldset>
         <legend class="mb-4">2. 想改善的生活問題?</legend>
-        <div class="grid grid-cols-3 gap-y-3 gap-x-1">
+        <div class="grid grid-cols-3 gap-y-4 gap-x-1">
           {#each improvements as item (item)}
             <label class="flex cursor-pointer items-center gap-1">
               <input type="checkbox" name="improvement" value={item} />{item}
@@ -103,7 +106,7 @@
       </fieldset>
       <fieldset>
         <legend class="mb-4">3. 每週累積運動量約為多少？</legend>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-y-1">
           {#each exercise as item (item)}
             <label class="flex cursor-pointer items-center gap-1">
               <input type="radio" name="exercise" value={item} required />{item}
@@ -213,6 +216,24 @@
 </div>
 
 <style>
+  .details-page {
+    padding-bottom: 56px;
+  }
+  .booking-form .control {
+    min-height: 36px;
+    padding-block: 5px;
+    line-height: 24px;
+  }
+  @media (min-width: 768px) {
+    .details-page {
+      padding-bottom: 52px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .details-page {
+      padding-bottom: 76px;
+    }
+  }
   input[type='radio'],
   input[type='checkbox'] {
     accent-color: var(--color-brand);

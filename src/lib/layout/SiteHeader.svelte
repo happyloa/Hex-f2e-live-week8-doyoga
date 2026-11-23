@@ -29,7 +29,7 @@
         open = false;
       }}
     >
-      <img src="/images/logo.png" width="96" height="31" alt="DOYOGA" />
+      <img src="/images/shared/logo.webp" width="96" height="31" alt="DOYOGA" />
     </a>
     <nav class="desktop-nav" aria-label="主選單">
       {#each navigation as item (item.href)}

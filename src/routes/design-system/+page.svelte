@@ -52,10 +52,10 @@
     <h2 class="mb-4 text-lead font-medium" id="brand-examples">標誌與圖示</h2>
     <div class="flex flex-wrap items-center gap-4 text-brand">
       <div class="rounded-card bg-sand p-5">
-        <img src="/images/logo.png" width="96" height="31" alt="DOYOGA 彩色標誌" />
+        <img src="/images/shared/logo.webp" width="96" height="31" alt="DOYOGA 彩色標誌" />
       </div>
       <div class="rounded-card bg-brand p-5">
-        <img src="/images/logo-white.png" width="96" height="31" alt="DOYOGA 白色標誌" />
+        <img src="/images/shared/logo-white.webp" width="96" height="31" alt="DOYOGA 白色標誌" />
       </div>
       <div class="flex flex-wrap gap-4" aria-label="選單、下一步、完成與評分圖示" role="img">
         <Menu /><ArrowRight /><CircleCheck /><Star />

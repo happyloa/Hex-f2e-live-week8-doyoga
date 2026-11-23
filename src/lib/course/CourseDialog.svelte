@@ -3,6 +3,7 @@
   import { aerialDescription } from '#lib/content.ts';
   import type { Course } from '#lib/content.ts';
   import Button from '#lib/ui/Button.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
 
   let { course, onclose }: { course: Course | undefined; onclose: () => void } = $props();
   let dialog: HTMLDialogElement;
@@ -26,7 +27,11 @@
         </button>
       </form>
       <div class="photo-frame dialog-photo">
-        <img src="/images/{course.id === 'basic' ? 'aerial' : course.image}.webp" alt="" />
+        <Photo
+          name={course.id === 'basic' ? 'aerial' : course.image}
+          sizes="(min-width: 1024px) 418px, (min-width: 768px) 264px, 165px"
+          alt=""
+        />
       </div>
       <div class="dialog-copy">
         <h2 class="text-section font-medium text-white" id="course-dialog-title">{course.title}</h2>

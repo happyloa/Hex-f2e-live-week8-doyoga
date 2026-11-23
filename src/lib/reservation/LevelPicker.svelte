@@ -7,9 +7,9 @@
   let track: HTMLElement | undefined = $state();
 </script>
 
-<section class="level-section bg-brand py-8 text-white" aria-labelledby="level-heading">
+<section class="level-section bg-brand text-white" aria-labelledby="level-heading">
   <div class="shell">
-    <h2 id="level-heading" class="mb-8 text-center text-section font-medium text-white">
+    <h2 id="level-heading" class="mb-6 text-center text-section font-medium text-white lg:mb-8">
       選擇課程階級
     </h2>
     <fieldset class="level-track" bind:this={track}>
@@ -25,7 +25,7 @@
             onchange={() => onchange(level.id)}
           />
           <span class="flex items-start justify-between gap-1">
-            <span class="text-[clamp(1.2rem,2vw,1.75rem)] font-medium">
+            <span class="text-section font-medium">
               {level.name}
               {level.english}
             </span>
@@ -47,15 +47,17 @@
 <style>
   .level-section {
     overflow: hidden;
+    padding-block: 32px 48px;
   }
   .level-track {
     display: grid;
     min-width: 0;
-    gap: 16px;
+    gap: 24px;
   }
   .level-card {
     display: block;
     min-width: 0;
+    min-height: 215px;
     padding: 20px;
     border: 3px solid transparent;
     border-radius: var(--radius-card);
@@ -82,24 +84,37 @@
     color: var(--color-brand-dark);
   }
   @media (min-width: 768px) {
+    .level-section {
+      padding-bottom: 0;
+    }
     .level-track {
       display: flex;
       gap: 30px;
+      width: calc(100% + var(--layout-gutter));
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
     }
     .level-card {
-      flex: 0 0 min(350px, 47%);
+      flex: 0 0 calc((100% - var(--layout-gutter) - 30px) / 2);
       scroll-snap-align: start;
     }
   }
   @media (min-width: 1024px) {
+    .level-section {
+      width: min(var(--layout-width), 100% - 2 * var(--layout-gutter));
+      margin-inline: auto;
+      padding-block: 40px 64px;
+    }
+    .level-section > .shell {
+      width: calc(100% - 80px);
+    }
     .level-track {
       display: grid;
+      width: 100%;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
       overflow: visible;
-      padding-inline: 16px;
     }
   }
 </style>

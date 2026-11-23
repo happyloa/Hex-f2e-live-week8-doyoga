@@ -107,7 +107,7 @@ export const teachers = [
   {
     name: 'Carol Tang',
     years: 10,
-    image: 'teacher-1.png',
+    image: 'teacher-1.webp',
     quote:
       '因為瑜珈讓我重新認識自己的身體，也讓我有了不一樣的人生。我希望能跟學生們分享瑜珈的好，讓大家能藉由瑜珈看見自己的內在與潛能，並將瑜珈自然的融入自己的生活中。',
     credentials: [
@@ -119,7 +119,7 @@ export const teachers = [
   {
     name: 'Kanae',
     years: 3,
-    image: 'teacher-2.png',
+    image: 'teacher-2.webp',
     quote:
       '希望每個人透過觀察，感受在進入動作，連接陰與陽，內和外，呼和吸的方式來更了解瑜珈練習的觀點。每個動作都帶著呼吸和順位，在平衡心理和生理的狀況下以安全和簡化的技巧進入瑜珈姿勢，帶著放鬆的心情，享受瑜珈和生命的喜悅，並樂在其中。',
     credentials: certifications,
@@ -127,14 +127,14 @@ export const teachers = [
   {
     name: 'Kuzuha',
     years: 3,
-    image: 'teacher-3.png',
+    image: 'teacher-3.webp',
     quote: '瑜珈是一種生活態度，學習平衡不強求，堅持不放棄，修煉心靈活在當下。',
     credentials: certifications,
   },
   {
     name: 'Asa Ifrit',
     years: 5,
-    image: 'teacher-4.png',
+    image: 'teacher-4.webp',
     quote:
       '帶著懵懂和好奇開始了瑜珈的探索。追隨印度瑜珈大師 Atui Shri 學習呼吸控制和冥想以及完成瑜珈大師宋光明師資培訓。',
     credentials: [ryt, 'Ashtangs TTC 50 小時認證'],
@@ -208,10 +208,10 @@ export const scheduleNotes = [
 ];
 
 export const testimonials = [
-  ['Joanne', '服務很好、設備優良！', 'user-1.png'],
-  ['穎旻', '上課後身體健康很多', 'user-2.png'],
-  ['子琪', '上課很有趣！', 'user-3.png'],
-  ['葉子', '老師的教學很專業', 'user-4.png'],
-  ['Ray', '很舒壓', 'user-5.png'],
-  ['俊儀', '讚的！', 'uset-6.png'],
+  ['Joanne', '服務很好、設備優良！', 'user-1.webp'],
+  ['穎旻', '上課後身體健康很多', 'user-2.webp'],
+  ['子琪', '上課很有趣！', 'user-3.webp'],
+  ['葉子', '老師的教學很專業', 'user-4.webp'],
+  ['Ray', '很舒壓', 'user-5.webp'],
+  ['俊儀', '讚的！', 'user-6.webp'],
 ] as const;

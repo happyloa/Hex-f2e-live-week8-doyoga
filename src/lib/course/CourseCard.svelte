@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Course } from '#lib/content.ts';
+  import Photo from '#lib/ui/Photo.svelte';
   let { course, onclick }: { course: Course; onclick: (event: MouseEvent) => void } = $props();
 </script>
 
@@ -10,11 +11,12 @@
     {onclick}
     aria-label="查看{course.title}課程詳情"
   >
-    <img
-      src="/images/{course.image}.webp"
+    <Photo
+      name={course.image}
+      sizes="(min-width: 1206px) 445px, (min-width: 1024px) 39vw, (min-width: 768px) calc((100vw - 108px) / 2), calc(100vw - 30px)"
       alt=""
       loading="lazy"
-      style:object-position={course.position}
+      style={`object-position: ${course.position}`}
     />
     <div class="course-label">
       <h3 class="text-2xl font-medium text-white lg:text-section">{course.title}</h3>
@@ -29,11 +31,11 @@
     height: 196px;
     overflow: visible;
   }
-  .course-card img {
+  .course-card :global(img) {
     border-radius: var(--radius-card);
     transition: filter 260ms;
   }
-  .course-card:hover img {
+  .course-card:hover :global(img) {
     transform: none;
     filter: brightness(0.88);
   }

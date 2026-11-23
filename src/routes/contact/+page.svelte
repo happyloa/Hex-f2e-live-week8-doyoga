@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '#lib/ui/Button.svelte';
   import PageHeading from '#lib/ui/PageHeading.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
 
   const address = '高雄市苓雅區北信街 23 號 2 樓';
   const directions = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
@@ -31,7 +32,12 @@
         class="map photo-frame block"
         aria-label="在 Google 地圖開啟 DOYOGA 教室位置（另開視窗）"
       >
-        <img src="/images/map.webp" width="909" height="547" alt="DOYOGA 教室位置示意地圖" />
+        <Photo
+          name="map"
+          sizes="(min-width: 1024px) 635px, (min-width: 768px) 570px, calc(100vw - 30px)"
+          alt="DOYOGA 教室位置示意地圖"
+          fetchpriority="high"
+        />
       </a>
       <h2 class="mb-2 mt-4 text-2xl" id="location-heading">DOYOGA 教室位置</h2>
       <p>{address}</p>

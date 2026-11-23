@@ -7,6 +7,7 @@
   import Teachers from '#lib/course/Teachers.svelte';
   import Button from '#lib/ui/Button.svelte';
   import PageHeading from '#lib/ui/PageHeading.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
   import { reveal } from '#lib/motion.ts';
 
   let searchInput = $state('');
@@ -64,7 +65,12 @@
   <PageHeading title="課程介紹" />
   <section class="featured" aria-labelledby="featured-course">
     <div class="photo-frame">
-      <img src="/images/aerial.webp" alt="老師在空中瑜珈課協助學員" fetchpriority="high" />
+      <Photo
+        name="aerial"
+        sizes="(min-width: 1024px) 540px, (min-width: 768px) calc((100vw - 108px) / 2), calc(100vw - 30px)"
+        alt="老師在空中瑜珈課協助學員"
+        fetchpriority="high"
+      />
     </div>
     <div class="featured-copy">
       <h2 id="featured-course" class="text-2xl font-medium lg:text-section">
@@ -216,6 +222,15 @@
     }
     .course-grid > :global(:nth-child(4n + 4)) {
       grid-column: 2 / 4;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .course-grid {
+      row-gap: 44px;
+    }
+    .catalog {
+      row-gap: 64px;
+      padding-bottom: 100px;
     }
   }
 </style>

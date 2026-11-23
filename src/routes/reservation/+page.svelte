@@ -55,11 +55,11 @@
 
 <div class="page-space">
   <BookingSteps current={1} />
-  <section class="shell" aria-labelledby="choose-plan-heading">
+  <section class="shell -mt-2 md:-mt-4" aria-labelledby="choose-plan-heading">
     <h2 id="choose-plan-heading" tabindex="-1" class="sr-only" bind:this={chooseHeading}>
       選擇方案
     </h2>
-    <div class="grid gap-4 lg:grid-cols-3 lg:gap-[30px]">
+    <div class="grid gap-4 md:gap-6 lg:grid-cols-3 lg:gap-[30px]">
       {#each plans as plan (plan.id)}
         <div
           class:hidden={Boolean(selection && selection.plan !== plan.id)}
@@ -69,17 +69,25 @@
             {plan}
             booking
             selected={selection?.plan === plan.id}
+            priority={plan.id === (selection?.plan ?? plans[0].id)}
             onclick={() => choosePlan(plan.id)}
           />
         </div>
       {/each}
     </div>
     {#if selection}
-      <div class="my-4 flex justify-center gap-3 text-brand lg:min-h-10">
+      <div
+        class="my-6 flex justify-center gap-3 text-brand lg:my-4 lg:grid lg:min-h-10 lg:grid-cols-3 lg:gap-[30px]"
+      >
         <button class="underline underline-offset-4 lg:hidden" type="button" onclick={reset}>
           重新選擇方案
         </button>
-        <ChevronDown size={25} aria-hidden="true" />
+        <ChevronDown
+          size={25}
+          class="lg:justify-self-center"
+          style={`grid-column: ${plans.findIndex((plan) => plan.id === selection?.plan) + 1}`}
+          aria-hidden="true"
+        />
       </div>
     {/if}
   </section>
@@ -88,7 +96,7 @@
     <div bind:this={levelBlock} tabindex="-1" class="scroll-mt-4">
       <LevelPicker selected={selection.level} onchange={chooseLevel} />
     </div>
-    <div class="shell mt-8 text-center text-brand" aria-live="polite">
+    <div class="shell mt-10 text-center text-brand" aria-live="polite">
       <p>您選擇的是</p>
       <p class="mt-1 text-lead underline underline-offset-4">{selectionLabel(selection)}</p>
       {#if courseTitle}<p class="mt-1 text-sm">{courseTitle}</p>{/if}

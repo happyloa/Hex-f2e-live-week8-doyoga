@@ -13,7 +13,7 @@
     <ul class="review-track mt-6 lg:mt-8" bind:this={track}>
       {#each testimonials as [name, quote, avatar] (name)}
         <li class="flex items-center gap-5 rounded-card bg-white p-4 text-brand">
-          <img src="/images/{avatar}" width="60" height="60" alt="" loading="lazy" />
+          <img src="/images/home/{avatar}" width="60" height="60" alt="" loading="lazy" />
           <div>
             <div class="flex flex-wrap items-baseline gap-x-2">
               <h3>{name}</h3>

@@ -3,6 +3,7 @@
   import { reveal } from '#lib/motion.ts';
   import CarouselButtons from '#lib/ui/CarouselButtons.svelte';
   import PageHeading from '#lib/ui/PageHeading.svelte';
+  import Photo from '#lib/ui/Photo.svelte';
   import SectionHeading from '#lib/ui/SectionHeading.svelte';
   import TextLink from '#lib/ui/TextLink.svelte';
 
@@ -21,7 +22,7 @@
     { title: '淋浴間', image: 'showers', description: '開放時間：每週一至週日 09:00～21:30' },
     { title: '器材出租', image: 'equipment', description: '有租借需求請至櫃檯登記' },
     { title: '交誼廳', image: 'social-room', description: '開放時間：每週一至週五 09:00～21:30' },
-  ];
+  ] as const;
   const features = [
     '四間教室：A、B 團體課教室、C、D 個人訓練室。',
     '瑜珈墊、輔具：每次課後會進行殺菌清潔，乾淨免擔心。',
@@ -37,13 +38,21 @@
   />
 </svelte:head>
 
-<div class="shell pt-[var(--page-space)] pb-10 lg:pb-16">
+<div class="studio-page shell pt-[var(--page-space)] pb-10 lg:pb-16">
   <PageHeading title="瑜珈空間" />
   <div class="studio-layout">
     <div class="room-gallery">
       {#each rooms as room, index (room.image)}
         <figure class="room photo-frame" class:wide={index === 0}>
-          <img src="/images/{room.image}.webp" alt="" loading={index === 0 ? 'eager' : 'lazy'} />
+          <Photo
+            name={room.image}
+            sizes={index === 0
+              ? '(min-width: 1024px) 730px, (min-width: 768px) 60vw, calc(100vw - 30px)'
+              : '(min-width: 1024px) 350px, (min-width: 768px) 28vw, calc(100vw - 30px)'}
+            alt=""
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : undefined}
+          />
           <figcaption>
             <h2 class="text-xl text-white lg:text-section">{room.title}</h2>
             <p>{room.description}</p>
@@ -61,27 +70,24 @@
   </div>
 </div>
 
-<section
-  class="recommendations section-space bg-sand"
-  aria-labelledby="recommended-courses"
-  {@attach reveal}
->
+<section class="recommendations bg-sand" aria-labelledby="recommended-courses" {@attach reveal}>
   <div class="shell">
     <SectionHeading id="recommended-courses" title="課程推薦" />
-    <ul class="recommend-track mt-6 lg:mt-8" bind:this={track}>
+    <ul class="recommend-track mt-8 md:mt-6 lg:mt-8" bind:this={track}>
       {#each courses as course (course.id)}
         <li>
           <a class="block text-brand hover:text-brand-dark" href="/course?course={course.id}">
             <div class="photo-frame">
-              <img
-                src="/images/{course.image}.webp"
+              <Photo
+                name={course.image}
+                sizes="(min-width: 1024px) 255px, (min-width: 768px) calc((100vw - 138px) / 3), 255px"
                 alt=""
                 loading="lazy"
-                style:object-position={course.position}
+                style={`object-position: ${course.position}`}
               />
             </div>
             <h3 class="mt-2 text-lead">{course.title}</h3>
-            <p class="mt-1">授課老師：{course.teacher}</p>
+            <p>授課老師：{course.teacher}</p>
           </a>
         </li>
       {/each}
@@ -110,10 +116,11 @@
   }
   .recommendations {
     overflow: hidden;
+    padding-block: 40px 8px;
   }
   .recommend-track {
     display: flex;
-    gap: 15px;
+    gap: 30px;
     width: calc(100% + var(--layout-gutter));
     overflow: auto;
     scroll-snap-type: x mandatory;
@@ -126,6 +133,17 @@
   .recommend-track .photo-frame {
     height: 196px;
   }
+  @media (max-width: 767px) {
+    .studio-page :global(.page-heading) {
+      margin-bottom: 24px;
+    }
+    .studio-layout {
+      gap: 32px;
+    }
+    .studio-layout aside {
+      min-height: 350px;
+    }
+  }
   @media (min-width: 768px) {
     .studio-layout {
       grid-template-columns: minmax(0, 450fr) minmax(0, 210fr);
@@ -137,6 +155,7 @@
     }
     .room.wide {
       grid-column: span 2;
+      height: 216px;
     }
     .room {
       height: 210px;
@@ -151,6 +170,12 @@
     .recommend-track li {
       flex-basis: calc((100% - 60px) / 3);
     }
+    .recommendations {
+      padding-block: 32px 12px;
+    }
+    .recommend-track .photo-frame {
+      height: 161px;
+    }
   }
   @media (min-width: 1024px) {
     .studio-layout {
@@ -159,7 +184,8 @@
     .room-gallery {
       row-gap: 24px;
     }
-    .room {
+    .room,
+    .room.wide {
       height: 350px;
     }
     .room figcaption {
@@ -170,6 +196,12 @@
     }
     .recommend-track li {
       flex-basis: 255px;
+    }
+    .recommendations {
+      padding-block: 40px 16px;
+    }
+    .recommend-track .photo-frame {
+      height: 196px;
     }
   }
 </style>

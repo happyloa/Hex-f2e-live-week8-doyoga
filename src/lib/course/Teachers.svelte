@@ -16,7 +16,7 @@
     <ul class="teacher-track" bind:this={track}>
       {#each teachers as teacher, index (teacher.name)}
         <li class="teacher-card {index % 2 ? 'bg-brand' : 'bg-rose'}">
-          <img src="/images/{teacher.image}" width="96" height="96" alt="" loading="lazy" />
+          <img src="/images/shared/{teacher.image}" width="96" height="96" alt="" loading="lazy" />
           <h3 class="text-lead text-white">{teacher.name} 老師</h3>
           <p class="mt-1">教學經歷 {teacher.years} 年</p>
           <blockquote class="my-4 text-left">「{teacher.quote}」</blockquote>
@@ -67,6 +67,14 @@
     .teacher-card {
       flex: 0 0 min(350px, 47%);
       scroll-snap-align: start;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .teacher-section {
+      padding-bottom: 32px;
+    }
+    .teacher-card {
+      flex-basis: calc((100% - var(--layout-gutter) - 30px) / 2);
     }
   }
 </style>
