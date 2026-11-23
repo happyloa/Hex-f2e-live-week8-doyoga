@@ -42,6 +42,17 @@
 }
 
 @layer base {
+  @media (forced-colors: none) {
+    :root {
+      scrollbar-color: var(--color-brand) var(--color-sand);
+    }
+
+    ::selection {
+      color: var(--color-paper);
+      background-color: var(--color-brand-dark);
+    }
+  }
+
   body {
     @apply bg-paper font-sans text-ink antialiased;
     line-height: 1.5;
