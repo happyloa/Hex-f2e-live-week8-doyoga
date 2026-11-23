@@ -1,15 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/state';
   import Button from '#lib/ui/Button.svelte';
   import BookingSteps from '#lib/reservation/BookingSteps.svelte';
-  import {
-    getBooking,
-    readSelection,
-    selectionHref,
-    selectionLabel,
-  } from '#lib/reservation/booking.svelte.ts';
-  import type { Selection } from '#lib/reservation/booking.svelte.ts';
+  import { getBooking, selectionHref, selectionLabel } from '#lib/reservation/booking.svelte.ts';
+  import type { PageProps } from './$types';
 
   const booking = getBooking();
   const improvements = [
@@ -21,16 +15,13 @@
     '注意力不足',
   ];
   const exercise = ['150 分鐘以上', '75～150 分鐘', '30～75 分鐘', '30 分鐘以下'];
-  let selection = $state<Selection>();
+  let { data }: PageProps = $props();
+  const selection = $derived(data.selection);
   let phoneError = $state('');
   let nameError = $state('');
   let phoneInput = $state<HTMLInputElement>();
   let nameInput = $state<HTMLInputElement>();
   let submitting = $state(false);
-
-  $effect(() => {
-    selection = readSelection(page.url.searchParams);
-  });
 
   async function submit(event: SubmitEvent) {
     event.preventDefault();
@@ -82,6 +73,7 @@
     </p>
     <form
       class="booking-form shell mt-6 max-w-87.5 space-y-8 text-brand md:mt-2 md:max-w-[330px] lg:mt-6 lg:max-w-87.5"
+      method="post"
       onsubmit={submit}
     >
       <fieldset>
