@@ -19,9 +19,9 @@
 
 <HomeIntro />
 <HomeShowcase />
-<section class="section-space shell" aria-labelledby="home-plans" {@attach reveal}>
+<section class="section-space shell" aria-labelledby="home-plans">
   <SectionHeading title="方案選擇" subtitle="DOYOGA 可以帶給你..." id="home-plans" />
-  <div class="mt-6 grid gap-4 lg:mt-8 lg:grid-cols-3 lg:gap-[30px]">
+  <div class="reveal-stagger mt-6 grid gap-4 lg:mt-8 lg:grid-cols-3 lg:gap-[30px]" {@attach reveal}>
     {#each plans as plan (plan.id)}<PlanCard {plan} />{/each}
   </div>
 </section>

@@ -86,6 +86,19 @@
     border-top: 1px solid var(--color-line);
     box-shadow: var(--shadow-card);
   }
+  .mobile-nav:not([hidden]) {
+    animation: menu-enter var(--motion-time) var(--ease-yoga) both;
+  }
+  @keyframes menu-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   nav a:hover,
   nav a[aria-current='page'] {
     color: var(--color-brand-dark);
