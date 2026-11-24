@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import ChevronDown from '@lucide/svelte/icons/chevron-down';
-  import { courses, plans, reservationNotes } from '#lib/content.ts';
+  import { findCourse, plans, reservationNotes } from '#lib/content.ts';
   import type { LevelId, PlanId } from '#lib/content.ts';
   import Button from '#lib/ui/Button.svelte';
   import BookingSteps from '#lib/reservation/BookingSteps.svelte';
@@ -14,11 +14,7 @@
   let selection = $state<Selection>();
   let levelBlock = $state<HTMLDivElement>();
   let chooseHeading: HTMLHeadingElement;
-  const courseTitle = $derived(
-    selection?.course === 'aerial'
-      ? '空中瑜珈'
-      : courses.find((item) => item.id === selection?.course)?.title,
-  );
+  const course = $derived(findCourse(selection?.course));
 
   $effect(() => {
     selection = readSelection(page.url.searchParams);
@@ -36,7 +32,9 @@
   }
 
   function chooseLevel(level: LevelId) {
-    if (selection) void setSelection({ ...selection, level });
+    if (selection) {
+      void setSelection({ ...selection, level, course: course?.level === level ? course.id : undefined });
+    }
   }
 
   async function reset() {
@@ -96,7 +94,10 @@
     <div class="shell mt-10 text-center text-brand md:max-lg:mt-8" aria-live="polite">
       <p>您選擇的是</p>
       <p class="mt-1 text-lead underline underline-offset-4">{selectionLabel(selection)}</p>
-      {#if courseTitle}<p class="mt-1 text-sm">{courseTitle}</p>{/if}
+      {#if course}<p class="mt-1 text-sm">課程：{course.title}</p>{/if}
+      <button type="button" class="mt-2 underline underline-offset-4 lg:hidden" onclick={reset}>
+        更改方案
+      </button>
     </div>
   {/if}
 

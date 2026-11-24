@@ -71,8 +71,6 @@ export const courses = [
   },
 ] as const;
 
-export type Course = (typeof courses)[number];
-
 export const aerialDescription = [
   '使用掛布懸掛在半空，進行哈達瑜珈體位法練習',
   '藉由地心引力的重力原理',
@@ -83,6 +81,24 @@ export const aerialDescription = [
   '藉由掛布的支持與保護',
   '加上老師細心指導，讓同學能更快掌握',
 ];
+
+export const featuredCourse = {
+  id: 'aerial',
+  title: '空中瑜珈',
+  teacher: 'Carol Tang',
+  image: 'aerial',
+  level: 'basic',
+  detail: `${aerialDescription.slice(0, 3).join('，')}。${aerialDescription[3]}。${aerialDescription.slice(4).join('，')}。`,
+} as const;
+
+export type Course = (typeof courses)[number] | typeof featuredCourse;
+export type CourseId = Course['id'];
+
+export function findCourse(id: string | null | undefined): Course | undefined {
+  return id === featuredCourse.id
+    ? featuredCourse
+    : courses.find((course) => course.id === id);
+}
 
 export const courseNotes = [
   '請攜帶適當的瑜珈墊和一條長毛巾配合課程使用。',

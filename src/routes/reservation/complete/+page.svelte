@@ -1,11 +1,13 @@
 <script lang="ts">
   import ChevronDown from '@lucide/svelte/icons/chevron-down';
   import CircleCheck from '@lucide/svelte/icons/circle-check';
+  import { findCourse } from '#lib/content.ts';
   import { getBooking, selectionHref, selectionLabel } from '#lib/reservation/booking.svelte.ts';
   import BookingSteps from '#lib/reservation/BookingSteps.svelte';
   import Button from '#lib/ui/Button.svelte';
   const booking = getBooking();
   const receipt = $derived(booking.receipt);
+  const course = $derived(findCourse(receipt?.selection.course));
 </script>
 
 <svelte:head><title>預約完成｜DOYOGA</title></svelte:head>
@@ -31,6 +33,7 @@
           <p class="mb-2">
             您預約的是 <span class="text-lead text-rose">{selectionLabel(receipt.selection)}</span>
           </p>
+          {#if course}<p>課程：{course.title}</p>{/if}
           <p>上課預約報到日：{receipt.date ? receipt.date.replaceAll('-', '/') : '待確認'}</p>
           <p>預約人：{receipt.name}</p>
           <p>年齡：{receipt.age} 歲</p>

@@ -1,10 +1,11 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { courseNotes, courses, aerialDescription, levels } from '#lib/content.ts';
+  import { aerialDescription, courseNotes, courses, featuredCourse, findCourse, levels } from '#lib/content.ts';
   import CourseCard from '#lib/course/CourseCard.svelte';
   import CourseDialog from '#lib/course/CourseDialog.svelte';
   import Teachers from '#lib/course/Teachers.svelte';
+  import { selectionHref } from '#lib/reservation/booking.svelte.ts';
   import Button from '#lib/ui/Button.svelte';
   import PageHeading from '#lib/ui/PageHeading.svelte';
   import Photo from '#lib/ui/Photo.svelte';
@@ -13,11 +14,13 @@
   let searchInput = $state('');
   let query = $state('');
   let level = $state('');
-  let selected = $state<(typeof courses)[number]>();
+  let courseId = $state<string | null>(null);
   let opener: HTMLElement | undefined;
+  const selected = $derived(findCourse(courseId));
+  const unknownCourse = $derived(courseId !== null && !selected);
 
   const filtered = $derived(
-    courses.filter(
+    (query ? [...courses, featuredCourse] : courses).filter(
       (course) =>
         (!level || course.level === level) &&
         `${course.title} ${course.teacher}`.toLocaleLowerCase().includes(query),
@@ -25,8 +28,7 @@
   );
 
   $effect(() => {
-    const id = page.url.searchParams.get('course');
-    selected = courses.find((course) => course.id === id);
+    courseId = page.url.searchParams.get('course');
   });
 
   function search(event: SubmitEvent) {
@@ -63,10 +65,16 @@
 
 <div class="shell pt-[var(--page-space)] pb-12 md:pb-18 lg:pb-16">
   <PageHeading title="課程介紹" class="font-normal max-lg:mb-6" />
+  {#if unknownCourse}
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-card bg-sand px-4 py-3 text-brand">
+      <p role="status">找不到這堂課程，可以從下方查看其他課程。</p>
+      <a href="/course" class="underline underline-offset-4">查看全部課程</a>
+    </div>
+  {/if}
   <section class="featured" aria-labelledby="featured-course">
     <div class="photo-frame">
       <Photo
-        name="aerial"
+        name={featuredCourse.image}
         sizes="(min-width: 1024px) 540px, (min-width: 768px) calc((100vw - 108px) / 2), calc(100vw - 30px)"
         alt="老師在空中瑜珈課協助學員"
         fetchpriority="high"
@@ -74,16 +82,23 @@
     </div>
     <div class="featured-copy">
       <h2 id="featured-course" class="text-section font-medium">
-        本月限定課程 - 空中瑜珈
+        本月限定課程 - {featuredCourse.title}
       </h2>
       <div class="mt-1 flex flex-wrap items-center gap-2 text-brand">
-        <p>授課老師：Carol Tang</p>
+        <p>授課老師：{featuredCourse.teacher}</p>
         <span class="course-chip">60 min</span>
       </div>
       <p class="featured-description mt-[13px] mb-4 text-brand">
         {#each aerialDescription as line (line)}{line}<br />{/each}
       </p>
-      <Button href="/reservation?plan=first&level=basic&course=aerial" class="text-xl">
+      <Button
+        href={selectionHref('/reservation', {
+          plan: 'first',
+          level: featuredCourse.level,
+          course: featuredCourse.id,
+        })}
+        class="text-xl"
+      >
         立即預約
       </Button>
     </div>

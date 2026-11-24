@@ -1,6 +1,6 @@
 <script lang="ts">
   import { scheduleNotes } from '#lib/content.ts';
-  import { schedule, weekdays } from '#lib/current-schedule.ts';
+  import { schedule, scheduleLabels, weekdays } from '#lib/current-schedule.ts';
   import PageHeading from '#lib/ui/PageHeading.svelte';
   import SectionHeading from '#lib/ui/SectionHeading.svelte';
   import { reveal } from '#lib/motion.ts';
@@ -36,10 +36,15 @@
           {#each schedule as row (row.time)}
             <tr>
               <th scope="row">{row.time}</th>
-              {#if row.sessions}{#each row.sessions as session, index (index)}<td>
-                    {session || '　'}
-                  </td>{/each}
-              {:else}<td colspan="6" class="text-center">休息</td>{/if}
+              {#if row.sessions}
+                {#each row.sessions as session, index (index)}
+                  <td>
+                    {#if session}
+                      <a href="/course?course={session}">{scheduleLabels[session]}</a>
+                    {/if}
+                  </td>
+                {/each}
+              {:else}<td colspan={weekdays.length} class="text-center">休息</td>{/if}
             </tr>
           {/each}
         </tbody>
@@ -89,6 +94,13 @@
   }
   th {
     font-weight: 400;
+  }
+  td a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  td a:hover {
+    color: var(--color-brand-dark);
   }
   thead th:first-child,
   tbody th {

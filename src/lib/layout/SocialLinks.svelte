@@ -22,32 +22,6 @@
   </li>
   <li>
     <a
-      href="https://www.instagram.com/"
-      aria-label="開啟 Instagram"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        width="1em"
-        height="1em"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.2"
-        aria-hidden="true"
-      >
-        <rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4.5" /><circle
-          cx="18"
-          cy="6"
-          r="1.2"
-          fill="currentColor"
-          stroke="none"
-        />
-      </svg>
-    </a>
-  </li>
-  <li>
-    <a
       href="https://social-plugins.line.me/lineit/share?url={shareUrl}"
       aria-label="分享到 LINE"
       target="_blank"

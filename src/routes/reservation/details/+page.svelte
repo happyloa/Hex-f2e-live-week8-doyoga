@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { findCourse } from '#lib/content.ts';
   import Button from '#lib/ui/Button.svelte';
   import BookingSteps from '#lib/reservation/BookingSteps.svelte';
   import { getBooking, selectionHref, selectionLabel } from '#lib/reservation/booking.svelte.ts';
@@ -17,6 +18,7 @@
   const exercise = ['150 分鐘以上', '75～150 分鐘', '30～75 分鐘', '30 分鐘以下'];
   let { data }: PageProps = $props();
   const selection = $derived(data.selection);
+  const course = $derived(findCourse(selection?.course));
   let phoneError = $state('');
   let nameError = $state('');
   let phoneInput = $state<HTMLInputElement>();
@@ -71,6 +73,7 @@
         {selectionLabel(selection)}
       </strong>
     </p>
+    {#if course}<p class="shell mt-1 text-center text-brand">課程：{course.title}</p>{/if}
     <form
       class="booking-form shell mt-[31px] max-w-87.5 space-y-8 text-ink md:mt-2 md:max-w-[330px] lg:mt-6 lg:max-w-87.5"
       method="post"
@@ -120,7 +123,7 @@
         />
       </div>
       <fieldset class="space-y-4">
-        <legend class="mb-4">5. 填寫基本資料，完成預約後會寄送通知至電子信箱</legend>
+        <legend class="mb-4">5. 填寫基本資料</legend>
         <div class="grid grid-cols-2 gap-2">
           <div class="field">
             <label for="booking-name">姓名</label><input
@@ -197,7 +200,7 @@
         </div>
       </fieldset>
       <Button type="submit" class="-mt-0.5 w-full text-xl" disabled={submitting}>送出</Button>
-      <p class="-mt-6 text-sm">此表單供作業示範，請使用測試資料。</p>
+      <p class="-mt-6 text-sm">此表單供作業示範，請使用測試資料。送出後會顯示預約資訊。</p>
     </form>
   {:else}
     <div class="shell mt-8 max-w-87.5 rounded-card bg-sand p-6 text-center text-brand">

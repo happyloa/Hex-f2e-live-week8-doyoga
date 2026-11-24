@@ -1,8 +1,8 @@
 <script lang="ts">
   import X from '@lucide/svelte/icons/x';
   import { onMount } from 'svelte';
-  import { aerialDescription } from '#lib/content.ts';
   import type { Course } from '#lib/content.ts';
+  import { selectionHref } from '#lib/reservation/booking.svelte.ts';
   import Button from '#lib/ui/Button.svelte';
   import Photo from '#lib/ui/Photo.svelte';
 
@@ -33,7 +33,14 @@
   });
 </script>
 
-<dialog bind:this={dialog} aria-labelledby="course-dialog-title" closedby="any" {onclose}>
+<dialog
+  bind:this={dialog}
+  aria-labelledby="course-dialog-title"
+  closedby="any"
+  onclose={() => {
+    if (course) onclose();
+  }}
+>
   {#if course}
     <div class="dialog-body">
       <form method="dialog" class="absolute right-3 top-3">
@@ -47,7 +54,7 @@
       </form>
       <div class="photo-frame dialog-photo">
         <Photo
-          name={course.id === 'basic' ? 'aerial' : course.image}
+          name={course.image}
           sizes="(min-width: 1024px) 418px, (min-width: 768px) 264px, 165px"
           alt=""
         />
@@ -58,14 +65,9 @@
           <p>授課老師：{course.teacher}</p>
           <span class="course-chip bg-brand!">60 min</span>
         </div>
-        <p class="dialog-description mb-4">
-          {#if course.id === 'basic'}
-            {aerialDescription[0]}<span class="md:hidden">，</span><br class="hidden md:inline" />{aerialDescription[1]}，{aerialDescription[2]}。<br />
-            {aerialDescription[3]}。<br />{aerialDescription.slice(4).join('，')}。
-          {:else}{course.detail}{/if}
-        </p>
+        <p class="dialog-description mb-4">{course.detail}</p>
         <Button
-          href="/reservation?plan=first&level={course.level}&course={course.id}"
+          href={selectionHref('/reservation', { plan: 'first', level: course.level, course: course.id })}
           variant="light"
           class="text-xl"
         >
@@ -97,7 +99,6 @@
     display: grid;
     gap: 16px;
     align-content: start;
-    min-height: 582px;
     padding: 32px 16px 24px;
   }
   .dialog-photo {
@@ -132,7 +133,6 @@
       grid-template-columns: minmax(0, 264fr) minmax(0, 358fr);
       align-items: center;
       gap: 20px;
-      min-height: 0;
       padding: 64px 24px;
     }
     .dialog-photo {
