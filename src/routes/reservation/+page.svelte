@@ -95,9 +95,6 @@
       <p>您選擇的是</p>
       <p class="mt-1 text-lead underline underline-offset-4">{selectionLabel(selection)}</p>
       {#if course}<p class="mt-1 text-sm">課程：{course.title}</p>{/if}
-      <button type="button" class="mt-2 underline underline-offset-4 lg:hidden" onclick={reset}>
-        更改方案
-      </button>
     </div>
   {/if}
 
