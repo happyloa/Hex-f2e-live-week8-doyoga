@@ -8,6 +8,13 @@
 
   let { course, onclose }: { course: Course | undefined; onclose: () => void } = $props();
   let dialog: HTMLDialogElement;
+  const isBasic = $derived(course?.id === 'basic');
+  const basicDetail = [
+    '使用掛布懸掛在半空，進行哈達瑜珈體位法練習',
+    '藉由地心引力的重力原理，鍛鍊核心肌群，舒緩脊椎壓力。',
+    '訓練身體協調性，深層放鬆身體。',
+    '課堂裡老師會視同學狀況安排教導倒立動作，對於不敢嘗試倒立的同學來說，藉由掛布的支持與保護，加上老師細心指導，讓同學能更快掌握。',
+  ];
 
   $effect(() => {
     if (course && !dialog.open) dialog.showModal();
@@ -35,6 +42,7 @@
 
 <dialog
   bind:this={dialog}
+  class:basic={isBasic}
   aria-labelledby="course-dialog-title"
   closedby="any"
   onclose={() => {
@@ -46,7 +54,7 @@
       <form method="dialog" class="absolute right-3 top-3">
         <button
           type="submit"
-          class="icon-button text-white! hover:bg-brand!"
+          class="close-course icon-button text-white! hover:bg-brand!"
           aria-label="關閉課程詳情"
         >
           <X size={24} />
@@ -54,7 +62,7 @@
       </form>
       <div class="photo-frame dialog-photo">
         <Photo
-          name={course.image}
+          name={isBasic ? 'aerial' : course.image}
           sizes="(min-width: 1024px) 418px, (min-width: 768px) 264px, 165px"
           alt=""
         />
@@ -65,7 +73,15 @@
           <p>授課老師：{course.teacher}</p>
           <span class="course-chip bg-brand!">60 min</span>
         </div>
-        <p class="dialog-description mb-4">{course.detail}</p>
+        <p class="dialog-description mb-4">
+          {#if isBasic}
+            {basicDetail[0]}<br class="hidden md:block" /><span class="md:hidden">，</span>{basicDetail[1]}<br />
+            {basicDetail[2]}<br />
+            {basicDetail[3]}
+          {:else}
+            {course.detail}
+          {/if}
+        </p>
         <Button
           href={selectionHref('/reservation', { plan: 'first', level: course.level, course: course.id })}
           variant="light"
@@ -88,9 +104,6 @@
     background: var(--color-rose);
     color: white;
   }
-  dialog[open] {
-    animation: appear 260ms var(--ease-yoga) both;
-  }
   dialog::backdrop {
     background: var(--color-paper);
   }
@@ -109,14 +122,27 @@
   .dialog-description {
     margin-top: 9px;
   }
+  .basic .dialog-body {
+    min-height: 582px;
+  }
+  .basic .close-course {
+    opacity: 0;
+  }
+  .basic .close-course:focus-visible,
+  .basic .close-course:hover {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    dialog[open] {
+      animation: appear 300ms ease-out both;
+    }
+  }
   @keyframes appear {
     from {
       opacity: 0;
-      transform: translateY(8px) scale(0.98);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
     }
   }
   @media (min-width: 768px) {
@@ -135,6 +161,9 @@
       gap: 20px;
       padding: 64px 24px;
     }
+    .basic .dialog-body {
+      min-height: 546px;
+    }
     .dialog-photo {
       width: 100%;
       height: 418px;
@@ -149,6 +178,10 @@
       grid-template-columns: minmax(0, 418fr) minmax(0, 350fr);
       padding: 64px 56px;
       gap: 40px;
+    }
+    .basic .dialog-copy {
+      align-self: start;
+      margin-top: 50px;
     }
   }
 </style>
